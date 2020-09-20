@@ -22,3 +22,5 @@ export function Home() {
 		</div>
 	);
 }
+
+//create a component with an array of objects
