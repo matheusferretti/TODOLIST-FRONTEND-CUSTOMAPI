@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TodoList = () => {
 	const [singleTodo, setSingleTodo] = useState({});
@@ -7,6 +7,26 @@ const TodoList = () => {
 		{ label: "clean house" },
 		{ label: "take out the dog" }
 	]);
+
+	useEffect(() => {
+		fetch("http://assets.breatheco.de/apis/fake/todos/user/f1996")
+			.then(function(response) {
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+				// Read the response as json.
+				return response.json();
+			})
+			.then(function(responseAsJson) {
+				// Do stuff with the JSON
+				console.log("responseAsJson", responseAsJson);
+				setTodos(responseAsJson);
+			})
+			.catch(function(error) {
+				console.log("Looks like there was a problem: \n", error);
+			}); // whatever you code here will execute only after the first time the component renders
+	}, []); // <------ PLEASE NOTICE THE EMPTY ARRAY
+
 	const handleChange = e => {
 		setSingleTodo({ label: e.target.value, done: false });
 	};
