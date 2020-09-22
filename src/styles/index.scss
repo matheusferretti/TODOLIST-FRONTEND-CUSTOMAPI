@@ -1,13 +1,59 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
-/* 
+.app-content{
+    width: 700px;
+    border: 2px black solid;
+    background: grey;
+    padding-top: 40px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto; 
+}
+h1 {
+    text-align: center;
+    color: brown;
+    font-size: 60px;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.todo{
+    display: flex;
+    width: 100%;
+    padding: 3px;
+}
 
-*/
+.btn-delete{
+    margin-left: auto;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 3px;
+    color: gray;
+    height: 20px;
+    width: 20px;
+    text-decoration: none;
+    background-color: black;
+}
+
+.line{
+    border-bottom: solid gray 1px;
+    width: 100%;
+}
+
+form input {
+    height: 25px;
+    vertical-align: auto;
+    display: flex;
+    border-radius: 5%;
+}
+
+form button{
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    height: 20px;
+    width: 100px;
+    border-radius: 4px;
+    background-color: darkslategray;
+    color: white;
+}
