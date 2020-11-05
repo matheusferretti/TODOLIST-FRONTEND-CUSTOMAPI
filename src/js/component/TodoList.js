@@ -9,7 +9,9 @@ const TodoList = () => {
 	]);
 
 	useEffect(() => {
-		fetch("http://assets.breatheco.de/apis/fake/todos/user/f1996")
+		fetch(
+			"https://3000-d2f89983-738d-4469-86c9-61537cf37fc4.ws-us02.gitpod.io/todos"
+		)
 			.then(function(response) {
 				if (!response.ok) {
 					throw Error(response.statusText);
@@ -31,7 +33,19 @@ const TodoList = () => {
 		setSingleTodo({ label: e.target.value, done: false });
 	};
 	const handleClick = e => {
-		setTodos([...todos, singleTodo]);
+		fetch(
+			"https://3000-d2f89983-738d-4469-86c9-61537cf37fc4.ws-us02.gitpod.io/todos",
+			{
+				method: "POST", // or 'POST'
+				body: JSON.stringify(singleTodo), // data can be `string` or {object}!
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		)
+			.then(res => res.json())
+			.then(response => setTodos(response))
+			.catch(error => console.error("Error:", error));
 		setSingleTodo({});
 		//to set singleTodo {}
 	};
