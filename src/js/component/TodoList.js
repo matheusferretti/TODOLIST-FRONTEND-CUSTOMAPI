@@ -46,14 +46,43 @@ const TodoList = () => {
 			.then(res => res.json())
 			.then(response => setTodos(response))
 			.catch(error => console.error("Error:", error));
-		setSingleTodo({});
+		setSingleTodo({ label: "" });
 		//to set singleTodo {}
 	};
-	const deleteTodo = task => {
-		const newTodos = todos.filter(item => item.label !== task);
-		console.log(newTodos);
-		setTodos(newTodos);
+	const deleteTodo = id => {
+		fetch(
+			"https://3000-d2f89983-738d-4469-86c9-61537cf37fc4.ws-us02.gitpod.io/todos" +
+				"/" +
+				id,
+			{
+				method: "DELETE", // or 'POST'
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		)
+			.then(function(response) {
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+				// Read the response as json.
+				return response.json();
+			})
+			.then(function(responseAsJson) {
+				// Do stuff with the JSON
+				setTodos(responseAsJson);
+			})
+			.catch(function(error) {
+				console.log("Looks like there was a problem: \n", error);
+			});
+
+		//to set singleTodo {}
 	};
+	// const deleteTodo = task => {
+	// 	const newTodos = todos.filter(item => item.label !== task);
+	// 	console.log(newTodos);
+	// 	setTodos(newTodos);
+	// };
 	return (
 		<>
 			<form onSubmit={e => e.preventDefault()}>
@@ -72,7 +101,7 @@ const TodoList = () => {
 							{todoItem.label}
 							<span
 								type="button"
-								onClick={() => deleteTodo(todoItem.label)}>
+								onClick={() => deleteTodo(todoItem.id)}>
 								{" "}
 								X{" "}
 							</span>
